@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".IntroScreen">
+
+    <TextView
+        android:id="@+id/textViewIntroTitle"
+        android:layout_width="252dp"
+        android:layout_height="57dp"
+        android:background="#327C8A"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:text="@string/math_quiz"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSecondIntro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.655" />
+
+    <TextView
+        android:id="@+id/textViewSecondIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:gravity="center"
+        android:text="Test Your Math Skills!"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewInstructions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Instructions:"
+
+        android:textColor="#272525"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="253dp"
+        android:layout_height="288dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:text="Welcome to the Math Quiz!\n\n Once you start the quiz, you will be given a math equation along with four multiple choice answers. Pick one and submit your answer. You have 30 seconds a question.\n\n Good Luck!"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewStartQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="To Begin, Click 'Start Quiz' Below!!"
+        app:layout_constraintBottom_toTopOf="@+id/startQuizBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewBestScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="Best Score: 9/10"
+        app:layout_constraintBottom_toTopOf="@+id/textViewStartQuiz"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/startQuizBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:capitalize="characters"
+        android:text="start quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

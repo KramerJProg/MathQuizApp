@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Math Quiz Application</string>
+    <string name="math_quiz">Math Quiz</string>
 </resources>
