@@ -1,19 +1,28 @@
 package com.example.mathquizapplication;
 
-import android.provider.BaseColumns;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-public final class DbHelper {
+import androidx.annotation.Nullable;
 
-    private DbHelper() {}
+public class DbHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "MathQuiz.db";
+    private static final int DATABASE_VERSION = 1;
 
-    public static class QuestionsStorage implements BaseColumns {
+    private SQLiteDatabase db;
 
-        public static final String TABLE_NAME = "quiz_questions";
-        public static final String COLUMN_NAME = "question";
-        public static final String COLUMN_OPTION1 = "option1";
-        public static final String COLUMN_OPTION2 = "option2";
-        public static final String COLUMN_OPTION3 = "option3";
-        public static final String COLUMN_OPTION4 = "option4";
-        public static final String COLUMN_ANSWER_NMBR = "answer_nmbr";
+    public DbHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 }
