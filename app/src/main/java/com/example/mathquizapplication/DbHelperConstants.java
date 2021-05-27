@@ -6,6 +6,9 @@ public final class DbHelperConstants {
 
     private DbHelperConstants() {}
 
+    /**
+     * Used for constants primarily for DbHelper.
+     */
     public static class QuestionsStorage implements BaseColumns {
 
         public static final String TABLE_NAME = "quiz_questions";

@@ -49,7 +49,7 @@
         android:layout_marginTop="96dp"
         android:background="@drawable/rounded_corner"
         android:gravity="center"
-        android:text="Find the product:"
+        android:text="Solve the equation:"
         android:textColor="@color/super_dark_teal"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +59,8 @@
 
     <TextView
         android:id="@+id/textViewQuestion1"
-        android:layout_width="190dp"
-        android:layout_height="67dp"
+        android:layout_width="194dp"
+        android:layout_height="75dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="5 X 5 = ?"
@@ -121,9 +121,10 @@
     <Button
         android:id="@+id/submitBtn"
         android:layout_width="241dp"
-        android:layout_height="64dp"
+        android:layout_height="70dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/aldrich"
+        android:gravity="center_horizontal|center_vertical"
         android:text="Submit"
         android:textSize="24sp"
         android:textStyle="bold"
