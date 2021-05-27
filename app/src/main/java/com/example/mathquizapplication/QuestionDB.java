@@ -1,5 +1,8 @@
 package com.example.mathquizapplication;
 
+/**
+ * Getters and Setters for the questions.
+ */
 public class QuestionDB {
     private String question;
     private String option1;
