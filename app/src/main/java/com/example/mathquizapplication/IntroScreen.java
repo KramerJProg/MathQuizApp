@@ -7,17 +7,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class IntroScreen extends AppCompatActivity {
 
     private static final int REQUEST_CODE_QUIZ = 1;
+    public static final String EXTRA_DIFFICULTY = "extraDifficulty";
 
     public static final String SHARED = "shared";
     public static final String BESTSCORE = "bestScore";
 
     private TextView textViewBestScore;
+    private Spinner spinnerDifficulty;
     private int bestScore;
 
     @Override
@@ -26,6 +30,13 @@ public class IntroScreen extends AppCompatActivity {
         setContentView(R.layout.activity_intro_screen);
 
         textViewBestScore = findViewById(R.id.textViewBestScore);
+        spinnerDifficulty = findViewById(R.id.spinner_difficulty);
+
+        String[] difficultyLevels = QuestionDB.getAllDifficultyLevels();
+        ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, difficultyLevels);
+        adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDifficulty.setAdapter(adapterDifficulty);
+
         loadBestScore();
 
         Button startQuizBtn = findViewById(R.id.startQuizBtn);
@@ -38,8 +49,10 @@ public class IntroScreen extends AppCompatActivity {
     }
 
     private void quizStart() {
+        String difficulty = spinnerDifficulty.getSelectedItem().toString();
+
         Intent intent = new Intent(IntroScreen.this, QuizQuestionScreen.class);
-        // BUG COME BACK TO
+        intent.putExtra(EXTRA_DIFFICULTY, difficulty);
         startActivity(intent);
     }
 

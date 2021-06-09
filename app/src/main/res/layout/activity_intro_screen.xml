@@ -28,21 +28,21 @@
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
-        android:layout_width="254dp"
-        android:layout_height="337dp"
+        android:layout_width="256dp"
+        android:layout_height="271dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textMultiLine"
         android:text="Welcome to the Math Quiz!\n\n Once you start the quiz, you will be given a math equation along with four multiple choice answers. Pick one and submit your answer. You have 30 seconds a question.\n\n Good Luck!"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewIntroTitle"
-        app:layout_constraintVertical_bias="0.934" />
+        app:layout_constraintVertical_bias="0.492" />
 
     <TextView
         android:id="@+id/textViewStartQuiz"
@@ -83,5 +83,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_difficulty"
+        android:layout_width="129dp"
+        android:layout_height="36dp"
+        android:animationCache="false"
+        android:gravity="center"
+        android:splitMotionEvents="false"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
