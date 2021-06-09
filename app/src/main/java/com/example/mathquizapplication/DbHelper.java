@@ -42,7 +42,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 QuestionsStorage.COLUMN_OPTION2 + " TEXT, " +
                 QuestionsStorage.COLUMN_OPTION3 + " TEXT, " +
                 QuestionsStorage.COLUMN_OPTION4 + " TEXT, " +
-                QuestionsStorage.COLUMN_ANSWER_NMBR + " INTEGER" + ")";
+                QuestionsStorage.COLUMN_ANSWER_NMBR + " INTEGER, " +
+                QuestionsStorage.COLUMN_DIFFICULTY + " TEXT" +
+                ")";
 
         db.execSQL(SQL_CREATE_QUESTIONS_TABLE);
 
@@ -60,42 +62,27 @@ public class DbHelper extends SQLiteOpenHelper {
      * Demo database test code
      */
     private void addQuestionsToTable() {
-        QuestionDB question1 = new QuestionDB("The answer is A", "A", "B", "C", "D", 1);
+        QuestionDB question1 = new QuestionDB("5 * 5 = ?", "25", "10", "15", "50", 1, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question1);
-        QuestionDB question2 = new QuestionDB("The answer is B", "A", "B", "C", "D", 2);
+        QuestionDB question2 = new QuestionDB("50 - 8 = ?", "58", "42", "62", "12", 2, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question2);
-        QuestionDB question3 = new QuestionDB("The answer is C", "A", "B", "C", "D", 3);
+        QuestionDB question3 = new QuestionDB("2(6 * 5) = ?", "30", "120", "60", "45", 3, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question3);
-        QuestionDB question4 = new QuestionDB("The answer is D", "A", "B", "C", "D", 4);
+        QuestionDB question4 = new QuestionDB("4 * 5 - 5 = ?", "100", "25", "4", "15", 4, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question4);
-        QuestionDB question5 = new QuestionDB("The answer is A", "A", "B", "C", "D", 1);
+        QuestionDB question5 = new QuestionDB("8 * 7 = ?", "56", "15", "30", "1", 1, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question5);
-        QuestionDB question6 = new QuestionDB("The answer is D", "A", "B", "C", "D", 4);
+        QuestionDB question6 = new QuestionDB("40 * 2 = ?", "40", "20", "60", "80", 4, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question6);
-    }
-
-    /*private void addQuestionsToTable() {
-        QuestionDB question1 = new QuestionDB("5 * 5 = ?", "25", "10", "15", "50", 1);
-        addQuestion(question1);
-        QuestionDB question2 = new QuestionDB("50 - 8 = ?", "58", "42", "62", "12", 2);
-        addQuestion(question2);
-        QuestionDB question3 = new QuestionDB("2(6 * 5) = ?", "30", "120", "60", "45", 3);
-        addQuestion(question3);
-        QuestionDB question4 = new QuestionDB("4 * 5 - 5 = ?", "100", "25", "4", "15", 4);
-        addQuestion(question4);
-        QuestionDB question5 = new QuestionDB("8 * 7 = ?", "56", "15", "30", "1", 1);
-        addQuestion(question5);
-        QuestionDB question6 = new QuestionDB("40 * 2 = ?", "40", "20", "60", "80", 4);
-        addQuestion(question6);
-        QuestionDB question7 = new QuestionDB("9(8 * 1) - 6 + 14 * 2 = ?", "42", "58", "94", "86", 3);
+        QuestionDB question7 = new QuestionDB("9(8 * 1) - 6 + 14 * 2 = ?", "42", "58", "94", "86", 3, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question7);
-        QuestionDB question8 = new QuestionDB("7(8 * 4) - 36 = ?", "48", "188", "368", "402", 2);
+        QuestionDB question8 = new QuestionDB("7(8 * 4) - 36 = ?", "48", "188", "368", "402", 2, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question8);
-        QuestionDB question9 = new QuestionDB("4 - 5(8 - 14) = ?", "-84", "-34", "84", "34", 4);
+        QuestionDB question9 = new QuestionDB("4 - 5(8 - 14) = ?", "-84", "-34", "84", "34", 4, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question9);
-        QuestionDB question10 = new QuestionDB("64 * 9 - 576 = ?", "0", "-27", "274", "None of these", 1);
+        QuestionDB question10 = new QuestionDB("64 * 9 - 576 = ?", "0", "-27", "274", "None of these", 1, QuestionDB.DIFFICULTY_EASY);
         addQuestion(question10);
-    }*/
+    }
 
     /**
      * Adds new questions to the database.
@@ -109,6 +96,7 @@ public class DbHelper extends SQLiteOpenHelper {
         content.put(QuestionsStorage.COLUMN_OPTION3, question.getOption3());
         content.put(QuestionsStorage.COLUMN_OPTION4, question.getOption4());
         content.put(QuestionsStorage.COLUMN_ANSWER_NMBR, question.getAnswerNmbr());
+        content.put(QuestionsStorage.COLUMN_DIFFICULTY, question.getDifficulty());
         db.insert(QuestionsStorage.TABLE_NAME, null, content);
 
     }
@@ -131,6 +119,34 @@ public class DbHelper extends SQLiteOpenHelper {
                 questionDB.setOption3(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION3)));
                 questionDB.setOption4(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION4)));
                 questionDB.setAnswerNmbr(cursor.getInt(cursor.getColumnIndex(QuestionsStorage.COLUMN_ANSWER_NMBR)));
+                questionDB.setDifficulty(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_DIFFICULTY)));
+                questionDbList.add(questionDB);
+            }
+            while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return questionDbList;
+    }
+
+    public List<QuestionDB> getQuestions(String difficulty) {
+        List<QuestionDB> questionDbList = new ArrayList<>();
+        db = getReadableDatabase();
+
+        String[] selectionArgs = new String[]{difficulty};
+        Cursor cursor = db.rawQuery("SELECT * FROM " + QuestionsStorage.TABLE_NAME +
+                " WHERE " + QuestionsStorage.COLUMN_DIFFICULTY + " = ?", selectionArgs);
+
+        if (cursor.moveToFirst()) {
+            do {
+                QuestionDB questionDB = new QuestionDB();
+                questionDB.setQuestion(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_NAME)));
+                questionDB.setOption1(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION1)));
+                questionDB.setOption2(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION2)));
+                questionDB.setOption3(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION3)));
+                questionDB.setOption4(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_OPTION4)));
+                questionDB.setAnswerNmbr(cursor.getInt(cursor.getColumnIndex(QuestionsStorage.COLUMN_ANSWER_NMBR)));
+                questionDB.setDifficulty(cursor.getString(cursor.getColumnIndex(QuestionsStorage.COLUMN_DIFFICULTY)));
                 questionDbList.add(questionDB);
             }
             while (cursor.moveToNext());

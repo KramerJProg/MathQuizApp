@@ -70,12 +70,14 @@ public class QuizQuestionScreen extends AppCompatActivity {
         textColorDefaultRadioBtn = radioBtn1.getTextColors();
         textColorDefaultTimer = textViewTimer.getTextColors();
 
-        DbHelper dbHelper = new DbHelper(this);
-        questionDBList = dbHelper.getAllQuestions();
-        questionCounterTotal = questionDBList.size();
-        Collections.shuffle(questionDBList);
+        if (savedInstanceState == null) {
+            DbHelper dbHelper = new DbHelper(this);
+            questionDBList = dbHelper.getQuestions("Easy");
+            questionCounterTotal = questionDBList.size();
+            Collections.shuffle(questionDBList);
 
-        showNextQuestion();
+            showNextQuestion();
+        }
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,7 +211,7 @@ public class QuizQuestionScreen extends AppCompatActivity {
     private void finishQuiz() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, correctScore);
-        setResult(RESULT_OK);
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 
