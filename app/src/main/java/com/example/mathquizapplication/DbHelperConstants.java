@@ -18,5 +18,6 @@ public final class DbHelperConstants {
         public static final String COLUMN_OPTION3 = "option3";
         public static final String COLUMN_OPTION4 = "option4";
         public static final String COLUMN_ANSWER_NMBR = "answer_nmbr";
+        public static final String COLUMN_DIFFICULTY = "difficulty";
     }
 }
