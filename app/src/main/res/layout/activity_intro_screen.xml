@@ -28,13 +28,13 @@
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
-        android:layout_width="256dp"
-        android:layout_height="271dp"
+        android:layout_width="263dp"
+        android:layout_height="286dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textMultiLine"
-        android:text="Welcome to the Math Quiz!\n\n Once you start the quiz, you will be given a math equation along with four multiple choice answers. Pick one and submit your answer. You have 30 seconds a question.\n\n Good Luck!"
+        android:text="Welcome to the Math Quiz!\n\n Once you start the quiz, you will be given a math equation along with four multiple choice answers. Pick one and submit your answer. You have 30 seconds per question. Pick your desired difficulty below and start your quiz!\n\n Good Luck!"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
@@ -86,13 +86,13 @@
 
     <Spinner
         android:id="@+id/spinner_difficulty"
-        android:layout_width="129dp"
-        android:layout_height="36dp"
+        android:layout_width="154dp"
+        android:layout_height="46dp"
         android:animationCache="false"
         android:gravity="center"
         android:splitMotionEvents="false"
-        android:visibility="visible"
         android:text="Difficulty"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
