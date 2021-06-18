@@ -27,6 +27,7 @@ public class QuizQuestionScreen extends AppCompatActivity {
     private TextView textViewCorrect;
     private TextView textViewIncorrect;
     private TextView textViewQuestionCount;
+    private TextView textViewDifficulty;
     private TextView textViewTimer;
     private RadioGroup radioBtnGrp;
     private RadioButton radioBtn1;
@@ -59,6 +60,7 @@ public class QuizQuestionScreen extends AppCompatActivity {
         textViewCorrect = findViewById(R.id.textViewCorrectCounter);
         textViewIncorrect = findViewById(R.id.textViewIncorrectCounter);
         textViewQuestionCount = findViewById(R.id.textViewCurrentQuestion);
+        textViewDifficulty = findViewById(R.id.textViewDifficulty);
         textViewTimer = findViewById(R.id.textViewTimer);
         radioBtnGrp = findViewById(R.id.radioGroup);
         radioBtn1 = findViewById(R.id.radioButton1Q1);
@@ -70,9 +72,14 @@ public class QuizQuestionScreen extends AppCompatActivity {
         textColorDefaultRadioBtn = radioBtn1.getTextColors();
         textColorDefaultTimer = textViewTimer.getTextColors();
 
+        Intent intent = getIntent();
+        String difficulty = intent.getStringExtra(IntroScreen.EXTRA_DIFFICULTY);
+
+        textViewDifficulty.setText("Level: " + difficulty);
+
         if (savedInstanceState == null) {
             DbHelper dbHelper = new DbHelper(this);
-            questionDBList = dbHelper.getQuestions("Easy");
+            questionDBList = dbHelper.getQuestions(difficulty);
             questionCounterTotal = questionDBList.size();
             Collections.shuffle(questionDBList);
 
