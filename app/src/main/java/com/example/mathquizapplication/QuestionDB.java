@@ -4,9 +4,9 @@ package com.example.mathquizapplication;
  * Getters and Setters for the questions.
  */
 public class QuestionDB {
-    public static final String DIFFICULTY_EASY = "Easy";
-    public static final String DIFFICULTY_MEDIUM = "Medium";
-    public static final String DIFFICULTY_HARD = "Hard";
+    public static final String DIFFICULTY_EASY = "Beginner";
+    public static final String DIFFICULTY_MEDIUM = "Intermediate";
+    public static final String DIFFICULTY_HARD = "Expert";
 
     private String question;
     private String option1;

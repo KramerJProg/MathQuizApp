@@ -25,6 +25,22 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/textViewDifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="Difficulty Setting ="
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewQuestionInstruction1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.003"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
+
+    <TextView
         android:id="@+id/textViewTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +62,7 @@
         android:id="@+id/textViewQuestionInstruction1"
         android:layout_width="349dp"
         android:layout_height="67dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="84dp"
         android:gravity="center"
         android:text="Solve the equation:"
         android:textColor="@color/white"
@@ -58,14 +74,15 @@
     <TextView
         android:id="@+id/textViewQuestion1"
         android:layout_width="345dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner"
         android:gravity="center"
         android:text="5 X 5 = ?"
         android:textColor="@color/super_dark_teal"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewQuestionInstruction1" />
 
@@ -73,11 +90,13 @@
         android:id="@+id/radioGroup"
         android:layout_width="326dp"
         android:layout_height="208dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="188dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewQuestion1"
+        app:layout_constraintVertical_bias="0.86">
 
         <RadioButton
             android:id="@+id/radioButton1Q1"
@@ -164,4 +183,5 @@
         app:layout_constraintStart_toEndOf="@+id/textViewCorrectCounter"
         app:layout_constraintTop_toBottomOf="@+id/submitBtn"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

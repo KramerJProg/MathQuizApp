@@ -92,6 +92,7 @@
         android:gravity="center"
         android:splitMotionEvents="false"
         android:visibility="visible"
+        android:text="Difficulty"
         app:layout_constraintBottom_toTopOf="@+id/textViewBestScore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
