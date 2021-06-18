@@ -20,7 +20,6 @@ public class IntroScreen extends AppCompatActivity {
     public static final String SHARED = "shared";
     public static final String BESTSCORE = "bestScore";
 
-    private TextView textViewBestScore;
     private Spinner spinnerDifficulty;
     private int bestScore;
 
@@ -29,7 +28,6 @@ public class IntroScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_screen);
 
-        textViewBestScore = findViewById(R.id.textViewBestScore);
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
 
         String[] difficultyLevels = QuestionDB.getAllDifficultyLevels();
@@ -73,12 +71,10 @@ public class IntroScreen extends AppCompatActivity {
     private void loadBestScore() {
         SharedPreferences shared = getSharedPreferences(SHARED, MODE_PRIVATE);
         bestScore = shared.getInt(BESTSCORE, 0);
-        textViewBestScore.setText("Best Score: " + bestScore);
     }
 
     private void updateBestScore(int newBestScore) {
         bestScore = newBestScore;
-        textViewBestScore.setText("Best Score: " + bestScore);
 
         SharedPreferences shared = getSharedPreferences(SHARED, MODE_PRIVATE);
         SharedPreferences.Editor edit = shared.edit();
