@@ -1,32 +1,45 @@
 package com.example.mathquizapplication;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IntroScreen extends AppCompatActivity {
 
-    private static final int REQUEST_CODE_QUIZ = 1;
     public static final String EXTRA_DIFFICULTY = "extraDifficulty";
 
-    public static final String SHARED = "shared";
-    public static final String BESTSCORE = "bestScore";
+    private static final int REQUEST_CODE_QUIZ = 1;
 
     private Spinner spinnerDifficulty;
-    private int bestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro_screen);
+
+        TextView resultLabel = findViewById(R.id.resultLabel);
+
+        int score = getIntent().getIntExtra("RIGHT_ANSWER_COUNT", 0);
+
+        SharedPreferences shared = getSharedPreferences("QUIZ_DATA", Context.MODE_PRIVATE);
+
+        resultLabel.setText("Your Score: " + score + " / 10");
+
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putInt("RIGHT_ANSWER_COUNT", score);
+        editor.apply();
 
         spinnerDifficulty = findViewById(R.id.spinner_difficulty);
 
@@ -34,8 +47,6 @@ public class IntroScreen extends AppCompatActivity {
         ArrayAdapter<String> adapterDifficulty = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, difficultyLevels);
         adapterDifficulty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDifficulty.setAdapter(adapterDifficulty);
-
-        loadBestScore();
 
         Button startQuizBtn = findViewById(R.id.startQuizBtn);
         startQuizBtn.setOnClickListener(new View.OnClickListener() {
@@ -52,33 +63,5 @@ public class IntroScreen extends AppCompatActivity {
         Intent intent = new Intent(IntroScreen.this, QuizQuestionScreen.class);
         intent.putExtra(EXTRA_DIFFICULTY, difficulty);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CODE_QUIZ) {
-            if (resultCode == RESULT_OK) {
-                int score = data.getIntExtra(QuizQuestionScreen.EXTRA_SCORE, 0);
-                if (score > bestScore) {
-                    updateBestScore(score);
-                }
-            }
-        }
-    }
-
-    private void loadBestScore() {
-        SharedPreferences shared = getSharedPreferences(SHARED, MODE_PRIVATE);
-        bestScore = shared.getInt(BESTSCORE, 0);
-    }
-
-    private void updateBestScore(int newBestScore) {
-        bestScore = newBestScore;
-
-        SharedPreferences shared = getSharedPreferences(SHARED, MODE_PRIVATE);
-        SharedPreferences.Editor edit = shared.edit();
-        edit.putInt(BESTSCORE,bestScore);
-        edit.apply();
     }
 }
