@@ -20,7 +20,6 @@ import java.util.Locale;
 
 public class QuizQuestionScreen extends AppCompatActivity {
 
-    public static final String EXTRA_SCORE = "extraScore";
     private static final long TIMER = 30000;  // Implements 30 seconds on the timer.
 
     private TextView textViewQuestion;
