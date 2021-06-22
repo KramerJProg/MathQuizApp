@@ -216,10 +216,13 @@ public class QuizQuestionScreen extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra(EXTRA_SCORE, correctScore);
-        setResult(RESULT_OK, resultIntent);
-        finish();
+        if (questionCounter == questionCounterTotal) {
+            Intent intent = new Intent(getApplicationContext(), IntroScreen.class);
+            intent.putExtra("RIGHT_ANSWER_COUNT", correctScore);
+            setResult(RESULT_OK, intent);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
